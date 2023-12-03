@@ -1,0 +1,13 @@
+android_sdk_config:
+  add_gradle_deps: true
+
+output:
+  c:
+    library_name: mahjong-engine
+    path: src/mahjong_engine/
+  dart:
+    path: lib/mahjong-engine.dart
+    structure: single_file
+
+classes:
+  - 'com.monsieurmahjong.commonjong.api.ShantenCalculation'
