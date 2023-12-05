@@ -13,7 +13,8 @@ class ImageLoader {
       List<AssetEntity> images = [];
       for (var album in albums) {
         final assetCount = await album.assetCountAsync;
-        final albumImages = await album.getAssetListPaged(page: 0, size: assetCount);
+        final albumImages =
+            await album.getAssetListPaged(page: 0, size: assetCount);
         images.addAll(albumImages);
       }
 
