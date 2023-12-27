@@ -31,7 +31,7 @@ class Game {
     shuffle();
   }
 
-  void detachBlock(Block blk) {
+  void _detachBlock(Block blk) {
     for (var foo in blk.lefts) {
       foo.rights.remove(blk);
     }
@@ -47,7 +47,7 @@ class Game {
     blocks.remove(blk);
   }
 
-  void attachBlock(Block blk) {
+  void _attachBlock(Block blk) {
     for (var foo in blk.lefts) {
       foo.rights.add(blk);
     }
@@ -72,11 +72,11 @@ class Game {
     frees.shuffle(random);
 
     for (int i = 0; i < frees.length; i++) {
-      detachBlock(frees[i]);
+      _detachBlock(frees[i]);
       sequence.add(frees[i]);
 
       for (int j = i + 1; j < frees.length; j++) {
-        detachBlock(frees[j]);
+        _detachBlock(frees[j]);
         sequence.add(frees[j]);
 
         bool solvable = false;
@@ -85,11 +85,11 @@ class Game {
           return (true, sequence);
         }
 
-        attachBlock(frees[j]);
+        _attachBlock(frees[j]);
         sequence.removeLast();
       }
 
-      attachBlock(frees[i]);
+      _attachBlock(frees[i]);
       sequence.removeLast();
     }
 
@@ -114,14 +114,15 @@ class Game {
     }
 
     if (blk.tileIndex == last.tileIndex) {
-      detachBlock(blk);
-      detachBlock(last);
+      _detachBlock(blk);
+      _detachBlock(last);
       return MahjongStatus.match;
     }
 
     return MahjongStatus.select;
   }
 
+  // TODO rename - when this should be called
   bool isFail() {
     int frees = 0;
     for (var foo in blocks) {
@@ -139,7 +140,7 @@ class Game {
     assert(solvable, "bad game: no solution");
 
     for (var foo in sequence) {
-      attachBlock(foo);
+      _attachBlock(foo);
     }
 
     List<int> backup = [];
@@ -173,6 +174,7 @@ class Game {
     return List.generate(layers * rows * columns, (index) => null);
   }
 
+  // TODO rename - not clear what the function does
   List<Block?> _attachAdjacentTiles(List<Block?> board) {
     for (var currentBlock in blocks) {
       currentBlock.coordinate.layer -= settings.minLayer;
@@ -187,6 +189,7 @@ class Game {
     return board;
   }
 
+  // TODO rename - not clear what the function does
   List<Block?> _attachPossibleBlocks(List<Block?> board) {
     for (var blk in blocks) {
       for (int i = -1; i <= 1; ++i) {
