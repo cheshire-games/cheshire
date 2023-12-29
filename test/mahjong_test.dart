@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:princess_peanutbutter/engines/mahjong/assets.dart';
 import 'package:princess_peanutbutter/engines/mahjong/parser.dart';
 import 'package:princess_peanutbutter/engines/mahjong/schema.dart';
-import 'package:princess_peanutbutter/engines/mahjong/templates.dart';
 
 void _testValidTemplates() {
   List<Map<String, dynamic>> validTemplates = [
@@ -38,7 +38,7 @@ void _testValidTemplates() {
   ];
   for (final (index, template) in validTemplates.indexed) {
     test("template $index is valid", () {
-      expect(() => parseTemplate(template), returnsNormally);
+      expect(() => TemplateParser.parse(template), returnsNormally);
     });
   }
 }
@@ -99,7 +99,7 @@ void _testInvalidSchemaTemplates() {
   for (final (index, template) in invalidTemplates.indexed) {
     test("template $index has invalid schema", () {
       expect(
-          () => parseTemplate(template), throwsA(isA<JsonSchemaException>()));
+          () => TemplateParser.parse(template), throwsA(isA<JsonSchemaException>()));
     });
   }
 }
@@ -175,7 +175,7 @@ void _testInvalidGameTemplates() {
   ];
   for (final (index, template) in invalidTemplates.indexed) {
     test("template $index has invalid game data", () {
-      expect(() => parseTemplate(template), throwsA(isA<AssertionError>()));
+      expect(() => TemplateParser.parse(template), throwsA(isA<AssertionError>()));
     });
   }
 }
@@ -183,7 +183,7 @@ void _testInvalidGameTemplates() {
 void _testTemplateFilesValid() {
   for (var templateName in gameTemplates) {
     test("Template file `$templateName` is valid", () async {
-      expect(() => parseTemplateFile(templateName), returnsNormally);
+      expect(() => TemplateParser.parseFromFile(templateName), returnsNormally);
     });
   }
 }

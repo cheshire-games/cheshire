@@ -1,12 +1,12 @@
-class Coordinate {
+class Coordinates {
   // For convenience, a block occupies 2 rows and 2 columns
   late int layer, row, column;
 
-  Coordinate({required this.layer, required this.row, required this.column});
+  Coordinates({required this.layer, required this.row, required this.column});
 }
 
 class Block {
-  late final Coordinate coordinate;
+  late final Coordinates coordinates;
   late int tileIndex;
 
   /* In a usual game, a block can be selected when no block is atop of it and
@@ -20,5 +20,5 @@ class Block {
     return tops.isEmpty && (rights.isEmpty || lefts.isEmpty);
   }
 
-  Block({required this.coordinate, required this.tileIndex});
+  Block({required this.coordinates, required this.tileIndex});
 }

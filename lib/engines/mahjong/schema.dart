@@ -1,7 +1,5 @@
 import 'package:json_schema/json_schema.dart';
-
-import '../../utils/asset.dart';
-import 'constants.dart';
+import 'assets.dart';
 
 class JsonSchemaException implements Exception {
   String cause;
@@ -13,9 +11,7 @@ class JsonSchemaException implements Exception {
 }
 
 Future<JsonSchema> _parseSchemaFile() async {
-  Map<String, dynamic> schemaJson = await loadAssetAsJson(
-      "$assetsPath/schema.json"
-  );
+  Map<String, dynamic> schemaJson = await getSchemaFile();
   return JsonSchema.create(schemaJson);
 }
 

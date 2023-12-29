@@ -1,1 +1,0 @@
-final List<String> gameTemplates = ["standard"]; // move to iterate over assets
