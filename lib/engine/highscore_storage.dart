@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:ed_mahjong/engine/db_implementations/sembast.dart';
-import 'package:ed_mahjong/engine/db_implementations/sqflite.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 abstract class IHighscoreDB {
@@ -13,12 +11,14 @@ class HighscoreDB extends IHighscoreDB {
   HighscoreDB._();
   static final HighscoreDB instance = HighscoreDB._();
 
-  IHighscoreDB get database {
-    if (kIsWeb) {
-      return HighscoreSembast.instance;
-    } else {
-      return HighscoreDBSql.instance;
-    }
+  IHighscoreDB? get database {
+    // TODO fix
+    // if (kIsWeb) {
+    //   return HighscoreSembast.instance;
+    // } else {
+    //   return HighscoreDBSql.instance;
+    // }
+    return null;
   }
 
   Map<String, int>? _times;
@@ -30,7 +30,7 @@ class HighscoreDB extends IHighscoreDB {
     if (_times == null) {
       final futureBuilder = Completer<void>();
       this._alreadyLoading = futureBuilder.future;
-      this._times = _times = await database.getTimes();
+      this._times = _times = {}; // await database.getTimes();
       this._alreadyLoading = null;
       futureBuilder.complete();
     }
@@ -45,7 +45,7 @@ class HighscoreDB extends IHighscoreDB {
     } else {
       this._times = {layout: time};
     }
-    await database.set(layout, time);
+    await database?.set(layout, time);
 
     for (var callback in callbacks) {
       callback();

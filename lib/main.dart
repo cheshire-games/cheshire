@@ -37,12 +37,12 @@ class MyApp extends StatelessWidget {
           title: 'ED Mahjong',
           theme: ThemeData(
             primarySwatch: Colors.amber,
-            accentColor: Colors.amber,
+            hintColor: Colors.amber,
             brightness: Brightness.light,
           ),
           darkTheme: ThemeData(
             primarySwatch: Colors.amber,
-            accentColor: Colors.amber,
+            hintColor: Colors.amber,
             brightness: Brightness.dark,
             /* dark theme settings */
           ),

@@ -1,4 +1,3 @@
-import 'package:dart_benchmark/dart_benchmark.dart';
 import 'package:ed_mahjong/engine/layouts/layout.dart';
 import 'package:ed_mahjong/engine/layouts/top_down_generator.dart';
 
@@ -9,20 +8,6 @@ Future<void> main() async {
   List<int> retriesCollector = [];
 
   const tries = 5000;
-
-  await DartBenchmark('Slow Benchmark', () {
-    var retries = 0;
-    while (true) {
-      try {
-        final board = makeBoard(layout, layoutPrecalc);
-        break;
-      } catch (e) {
-        retries++;
-      }
-    }
-    retriesCollector.add(retries);
-  }, count: tries, warmup: false)
-      .run();
 
   final lowest = retriesCollector.fold<int>(
       9999999,

@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:path/path.dart';
 
+const debugMode = true;
 const tiles = [
   "TILE_1",
   "TILE_1_SEL",
@@ -50,59 +52,59 @@ const tiles = [
   "DRAGON_3"
 ];
 
-void main3(List<String> arguments) async {
-  final result = await Process.run("inkscape", [
-    "--export-type=png",
-    "--export-id=DRAGON_1;DRAGON_2;DRAGON_3",
-    "c:\\users\\nordern\\androidstudioprojects\\flutter_app\\assets\\tilesets\\jade.svgz"
-  ]);
-  print(result.stdout);
-  print(result.stderr);
-}
-
 const tilesetPath = "./assets/tilesets/";
 
-void main(List<String> arguments) async {
-  if (arguments.length == 0) {
-    arguments = [];
-    final listing =
-        Directory.fromRawPath(Uint8List.fromList(tilesetPath.codeUnits)).list();
-    await for (var file in listing) {
-      final base = basename(file.path);
-      if (!base.endsWith(".desktop")) continue;
-      arguments.add(basenameWithoutExtension(file.path));
-    }
+void debug(String message) {
+  if (debugMode) {
+    print(message);
   }
-  Future.wait(arguments.map((tileset) => pngfyTileset(tileset)));
 }
 
-Future<void> pngfyTileset(String tileset) async {
+void main(List<String> tilesets) async {
+  if (tilesets.length == 0) {
+    tilesets = [];
+    await for (var file in _listFilesInDirectory(tilesetPath)) {
+      final base = basename(file.path);
+      if (!base.endsWith(".desktop")) continue;
+      tilesets.add(basenameWithoutExtension(file.path));
+    }
+  }
+  debug("tilesets: ${tilesets.join(', ')}");
+  for (var i = 0; i < tilesets.length; i++) {
+    await _pngfyTileset(tilesets[i]);
+  }
+}
+
+Stream<FileSystemEntity> _listFilesInDirectory(String path) {
+  debug("Listing files in directory `$path`..");
+  return Directory.fromRawPath(Uint8List.fromList(canonicalize(path).codeUnits)).list();
+}
+
+Future<void> _runCommand(String executable, List<String> arguments) async {
+  debug("$executable ${arguments.join(' ')}");
+  final result = await Process.run(executable, arguments);
+  debug("OUTPUT: ${result.stdout}\n ERROR: ${result.stderr}");
+}
+
+Future<void> _pngfyTileset(String tileset) async {
+  print("PNGfy tileset $tileset..");
   final desktopFile = '$tileset.desktop';
   File file = new File(tilesetPath + desktopFile);
   String futureContent = await file.readAsString();
   final lines = futureContent.split(RegExp(r"[\n\r]+"));
-  // final tilesetMeta = TilesetMeta.LoadString(desktopFile, futureContent);
-  for (var line in lines) {
-    if (!line.startsWith("FileName=")) continue;
-    final file = line.substring(9);
-    final target = "$tilesetPath$tileset/";
-    await Directory.fromRawPath(Uint8List.fromList(target.codeUnits))
-        .create(recursive: true);
-    final result = await Process.run("inkscape", [
+  final target = "$tilesetPath$tileset/";
+  await Directory.fromRawPath(Uint8List.fromList(target.codeUnits))
+      .create(recursive: true);
+
+  final svgFilename = lines
+      .firstWhere((line) => line.startsWith("FileName="))
+      .substring("FileName=".length);
+  Future.wait(tiles.map((tile) async {
+    await _runCommand("inkscape", [
       "--export-type=png",
-      "--export-id=${tiles.join(";")}",
-      absolute(canonicalize("$tilesetPath$file"))
+      "--export-id=$tile",
+      "--export-filename=${target + tile}.png",
+      absolute(canonicalize("$tilesetPath$svgFilename"))
     ]);
-    print(result.stdout);
-    print(result.stderr);
-    final listing =
-        Directory.fromRawPath(Uint8List.fromList(tilesetPath.codeUnits)).list();
-    final tilesetPrefix = basenameWithoutExtension(file) + '_';
-    await for (var file in listing) {
-      final filename = basename(file.path);
-      if (!filename.startsWith(tilesetPrefix) || !filename.endsWith(".png"))
-        continue;
-      await file.rename(target + filename.substring(tilesetPrefix.length));
-    }
-  }
+  }));
 }
