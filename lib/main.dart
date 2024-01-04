@@ -6,7 +6,6 @@ import 'package:ed_mahjong/engine/tileset/tileset_meta.dart';
 import 'package:ed_mahjong/licences.dart';
 import 'package:ed_mahjong/preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/game/game_screen.dart';
