@@ -5,9 +5,9 @@ import 'package:ed_mahjong/engine/tileset/tileset_flutter.dart';
 import 'package:ed_mahjong/engine/tileset/tileset_meta.dart';
 import 'package:ed_mahjong/licences.dart';
 import 'package:ed_mahjong/preferences.dart';
+import 'package:ed_mahjong/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'screens/game/game_screen.dart';
 import 'screens/home.dart';
 import 'screens/settings/settings_screen.dart';
@@ -63,5 +63,21 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => MyHomePage());
           },
         ));
+  }
+}
+
+// TODO fix
+class LoginApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Princess Peanutbutter',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.indigo,
+        brightness: Brightness.dark,
+      ),
+      home: SignInScreen(),
+    );
   }
 }
