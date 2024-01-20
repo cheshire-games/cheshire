@@ -14,9 +14,9 @@ def transform_images(download_path: Path, transform_directory: Path) -> Path:
 
     for step in [
         filter_animals,
+        split_images,
         remove_background,
         resize_images,
-        # split_images
     ]:
         current_path = step(
             input_path=current_path,

@@ -14,7 +14,7 @@ def remove_background(input_path: Path, output_directory: Path) -> Path:
     for file in Path(input_path).glob("*"):
         if file.suffix in ALLOWED_EXTENSIONS:
             input_image = Image.open(str(file))
-            # input_image.thumbnail((500, 500))
+            input_image.thumbnail((500, 500))
             output_image = remove(
                 data=input_image, session=session, alpha_matting=True, alpha_matting_erode_size=0
             )

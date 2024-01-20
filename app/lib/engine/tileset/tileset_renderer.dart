@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:ed_mahjong/engine/pieces/mahjong_tile.dart';
@@ -14,15 +13,15 @@ class TilesetRenderer {
       BuildContext context, TilesetMeta tileset) async {
     final assetBundle = DefaultAssetBundle.of(context);
     final folder =
-        '${baseFolder}/${basenameWithoutExtension(tileset.fileName)}';
+        '$baseFolder/${basenameWithoutExtension(tileset.fileName)}';
 
-    var baseTile = loadImage(assetBundle, tileset, "${folder}/TILE_1");
+    var baseTile = loadImage(assetBundle, tileset, "$folder/TILE_1");
     final images = await Future.wait<Image>([
       baseTile,
       darkenImage(tileset, baseTile),
-      loadImage(assetBundle, tileset, "${folder}/TILE_1_SEL"),
+      loadImage(assetBundle, tileset, "$folder/TILE_1_SEL"),
       ...MahjongTile.values.map((tile) =>
-          loadImage(assetBundle, tileset, "${folder}/${tileToString(tile)}")),
+          loadImage(assetBundle, tileset, "$folder/${tileToString(tile)}")),
     ]);
 
     final Map<MahjongTile, Image> faceImg = {};

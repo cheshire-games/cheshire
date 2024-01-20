@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import cv2
-import numpy as np
 
 from photo_uploader import mkdir_override, OUTPUT_IMAGE_EXTENSION, ALLOWED_EXTENSIONS
 
