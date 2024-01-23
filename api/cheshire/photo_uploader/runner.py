@@ -1,11 +1,10 @@
 from pathlib import Path
 
-from photo_uploader.animals import filter_animals
-from photo_uploader.background import remove_background
-from photo_uploader.downloader import download_images
-from photo_uploader.resize import resize_images
-from photo_uploader.split import split_images
-from photo_uploader.uploader import upload_images
+from cheshire.photo_uploader.animals import filter_animals
+from cheshire.photo_uploader.background import remove_background
+from cheshire.photo_uploader.downloader import download_images
+from cheshire.photo_uploader.resize import resize_images
+from cheshire.photo_uploader.uploader import upload_images
 
 
 def transform_images(download_path: Path, transform_directory: Path) -> Path:
@@ -14,7 +13,6 @@ def transform_images(download_path: Path, transform_directory: Path) -> Path:
 
     for step in [
         filter_animals,
-        split_images,
         remove_background,
         resize_images,
     ]:

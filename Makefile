@@ -9,3 +9,5 @@ build:
 		--build-arg flutter_version=${FLUTTER_VERSION} \
 		--build-arg python_version=${PYTHON_VERSION} \
 		--tag ${IMAGE_NAME} .
+	$(MAKE) -C api build
+	$(MAKE) -C app build

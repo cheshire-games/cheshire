@@ -1,11 +1,11 @@
 from pathlib import Path
 
-import photo_uploader.runner as photo_uploader
+from cheshire.photo_uploader.runner import transform_images
 
 
-def test_transform_photos():
+def test_transform_images():
     input_path: Path = Path("resources/images")
-    output_path: Path = photo_uploader.transform_images(
+    output_path: Path = transform_images(
         download_path=input_path,
         transform_directory=input_path / "generated"
     )

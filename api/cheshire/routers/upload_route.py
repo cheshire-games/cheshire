@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-import photo_uploader.runner as photo_uploader
+import cheshire.photo_uploader.runner as photo_uploader
 
 photo_uploader_router = APIRouter()  # GPU intensive
 

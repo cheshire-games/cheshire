@@ -2,7 +2,7 @@ import os
 
 from fastapi import APIRouter
 
-from upload_route import photo_uploader_router
+from cheshire.routers.upload_route import photo_uploader_router
 
 ROUTERS: dict[str, APIRouter] = {"photo_uploader": photo_uploader_router}
 

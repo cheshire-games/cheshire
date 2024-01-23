@@ -20,7 +20,7 @@ ARG python_version
 RUN set -x \
     && python="python${python_version}" \
     && apt-get install -y ${python} python3-pip \
-    && echo "alias python=\"${python}\"" >> ~/.bashrc
+    && ln -s $(which ${python}) /usr/bin/python
 
 ## Note on installing Flutter:
 ## Installing Flutter directly from github repository due to missing arm64 support in Flutter SDK archive:
