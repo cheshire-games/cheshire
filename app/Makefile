@@ -4,3 +4,6 @@ FLUTTER_VERSION 	:= 		"3.16.5"
 
 build:
 	docker build --tag ${IMAGE_NAME} .
+
+test:
+	echo "TBD - implement Flutter tests"

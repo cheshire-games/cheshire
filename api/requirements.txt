@@ -2,10 +2,8 @@
 opencv-python-headless
 
 rembg~=2.0.53
-pytest
 boto3~=1.34.19
 requests
-black
 fastapi~=0.109.0
 Pillow~=10.2.0
 pydantic~=2.5.3
