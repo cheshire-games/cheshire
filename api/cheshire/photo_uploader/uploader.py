@@ -5,8 +5,8 @@ from concurrent import futures
 
 import boto3
 
-from logger import logger
-from photo_uploader import (
+from cheshire.logger import logger
+from cheshire.photo_uploader import (
     OUTPUT_IMAGE_EXTENSION,
     BUCKET_NAME,
 )

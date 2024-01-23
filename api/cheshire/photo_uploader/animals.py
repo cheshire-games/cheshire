@@ -4,7 +4,7 @@ from pathlib import Path
 
 import cv2
 
-from photo_uploader import mkdir_override, ALLOWED_EXTENSIONS
+from cheshire.photo_uploader import mkdir_override, ALLOWED_EXTENSIONS
 
 
 @cache

@@ -1,9 +1,17 @@
+import os
 from pathlib import Path
 
 from PIL import Image
 from rembg import remove, new_session
 
-from photo_uploader import OUTPUT_IMAGE_EXTENSION, mkdir_override, ALLOWED_EXTENSIONS
+from cheshire.photo_uploader import OUTPUT_IMAGE_EXTENSION, mkdir_override, ALLOWED_EXTENSIONS
+
+
+def _get_alpha_matting_settings() -> dict:
+    return (
+        dict(alpha_matting=False) if os.environ.get("ALPHA_MATTING_ENABLED") == "false"
+        else dict(alpha_matting=True, alpha_matting_erode_size=5)
+    )
 
 
 def remove_background(input_path: Path, output_directory: Path) -> Path:
@@ -16,7 +24,9 @@ def remove_background(input_path: Path, output_directory: Path) -> Path:
             input_image = Image.open(str(file))
             input_image.thumbnail((500, 500))
             output_image = remove(
-                data=input_image, session=session, alpha_matting=True, alpha_matting_erode_size=0
+                data=input_image,
+                session=session,
+                **_get_alpha_matting_settings()
             )
             output_image_path = str(output_directory / f"{file.stem}{OUTPUT_IMAGE_EXTENSION}")
             output_image.save(output_image_path)

@@ -5,7 +5,7 @@ from pathlib import Path
 
 import boto3.session
 
-from photo_uploader import BUCKET_NAME
+from cheshire.photo_uploader import BUCKET_NAME
 from cheshire import MAX_PHOTOS_TO_UPLOAD
 from cheshire.logger import logger
 

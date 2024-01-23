@@ -3,8 +3,8 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from logger import logger
-from photo_uploader import mkdir_override, ALLOWED_EXTENSIONS
+from cheshire.logger import logger
+from cheshire.photo_uploader import mkdir_override, ALLOWED_EXTENSIONS
 
 
 def split_images(input_path: Path, output_directory: Path) -> Path:
