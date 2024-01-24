@@ -32,7 +32,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: API tests
-        run: make -C api ci-test
+        run: cd api && make ci-test
 
 #build:
 #  runs-on: ubuntu-latest
