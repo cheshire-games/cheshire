@@ -12,6 +12,7 @@ jobs:
 
   test:
     strategy:
+      runs-on: ${{ matrix.os }}
       matrix:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
         architecture: [ "x64", "x86" ]
