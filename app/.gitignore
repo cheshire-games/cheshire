@@ -8,3 +8,5 @@
 .pub-cache/
 .pub/
 /build/
+
+assets/tilesets/*/*.png
