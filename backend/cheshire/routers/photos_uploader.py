@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-import cheshire.photo_uploader.runner as photo_uploader
+import cheshire.photos.upload.runner as photo_uploader
 
 photo_uploader_router = APIRouter()  # GPU intensive
 
@@ -13,6 +13,14 @@ class PhotoUploadInfo(BaseModel):
 
 @photo_uploader_router.post("/photos")
 async def upload_photos(photo_upload_info: PhotoUploadInfo):
+    return photo_uploader.run(
+        user_id=photo_upload_info.user_id,
+        upload_id=photo_upload_info.upload_id,
+    )
+
+
+@photo_uploader_router.post("/photos")
+def upload_photos(photo_upload_info: PhotoUploadInfo):
     return photo_uploader.run(
         user_id=photo_upload_info.user_id,
         upload_id=photo_upload_info.upload_id,

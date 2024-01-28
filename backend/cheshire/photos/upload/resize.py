@@ -2,7 +2,7 @@ from pathlib import Path
 
 import cv2
 
-from cheshire.photo_uploader import mkdir_override, OUTPUT_IMAGE_EXTENSION, ALLOWED_EXTENSIONS
+from cheshire.photos.upload import mkdir_override, OUTPUT_IMAGE_EXTENSION, ALLOWED_EXTENSIONS
 
 
 def resize_images(input_path: Path, output_directory: Path) -> Path:
