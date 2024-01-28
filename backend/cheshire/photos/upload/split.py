@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 
 from cheshire.logger import logger
-from cheshire.photo_uploader import mkdir_override, ALLOWED_EXTENSIONS
+from cheshire.photos.upload import mkdir_override, ALLOWED_EXTENSIONS
 
 
 def split_images(input_path: Path, output_directory: Path) -> Path:

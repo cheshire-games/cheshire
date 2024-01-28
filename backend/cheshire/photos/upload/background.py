@@ -4,7 +4,7 @@ from pathlib import Path
 from PIL import Image
 from rembg import remove, new_session
 
-from cheshire.photo_uploader import OUTPUT_IMAGE_EXTENSION, mkdir_override, ALLOWED_EXTENSIONS
+from cheshire.photos.upload import OUTPUT_IMAGE_EXTENSION, mkdir_override, ALLOWED_EXTENSIONS
 
 
 def _get_alpha_matting_settings() -> dict:

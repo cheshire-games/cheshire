@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from cheshire.photo_uploader.runner import transform_images
+from cheshire.photos.upload import transform_images
 
 
 def test_transform_images():
