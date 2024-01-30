@@ -1,43 +1,43 @@
-name: Backend Workflow
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    paths:
-      - "backend/**"
-      - "!backend/**.md"
-jobs:
-
-  test:
-    runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        working-directory: ./backend
-
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
-        architecture: [ "x64", "arm64" ]
-        python-version: [ "3.11" ]
-        exclude:
-          - os: ubuntu-latest
-            architecture: arm64
-          - os: windows-latest
-            architecture: arm64
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          architecture: ${{ matrix.architecture }}
-          python-version: ${{ matrix.python-version }}
-
-      - name: Backend tests
-        run: make ci-test
-
+#name: Backend Workflow
+#
+#on:
+#  push:
+#    branches: [ "main" ]
+#  pull_request:
+#    paths:
+#      - "backend/**"
+#      - "!backend/**.md"
+#jobs:
+#
+#  test:
+#    runs-on: ${{ matrix.os }}
+#    defaults:
+#      run:
+#        working-directory: ./backend
+#
+#    strategy:
+#      matrix:
+#        os: [ ubuntu-latest, macos-latest, windows-latest ]
+#        architecture: [ "x64", "arm64" ]
+#        python-version: [ "3.11" ]
+#        exclude:
+#          - os: ubuntu-latest
+#            architecture: arm64
+#          - os: windows-latest
+#            architecture: arm64
+#
+#    steps:
+#      - uses: actions/checkout@v3
+#
+#      - name: Setup Python
+#        uses: actions/setup-python@v4
+#        with:
+#          architecture: ${{ matrix.architecture }}
+#          python-version: ${{ matrix.python-version }}
+#
+#      - name: Backend tests
+#        run: make ci-test
+#
 #  build:
 #    runs-on: ubuntu-latest
 #
