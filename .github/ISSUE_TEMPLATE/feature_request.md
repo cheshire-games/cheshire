@@ -7,14 +7,13 @@ assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+Please follow the below draft to help create a unified language across the project
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+== Background, Context, etc
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+Task list
+- [x] example task
+- [ ] example for checked task
+- [ ] use `- [ ] ` markdown to create this list item
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+anything else...
