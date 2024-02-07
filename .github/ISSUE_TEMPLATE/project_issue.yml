@@ -1,13 +1,4 @@
 name: MyIssueTemplate
 projects: "cheshire-games/1"
 body:
-    Please follow the below draft to help create a unified language across the project
-
-    == Background, Context, etc
-
-    Task list
-    - [x] example task
-    - [ ] example for checked task
-    - [ ] use `- [ ] ` markdown to create this list item
-
-    anything else...
+    - feature_request.md
