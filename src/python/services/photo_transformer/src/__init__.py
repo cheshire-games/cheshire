@@ -1,0 +1,1 @@
+OUTPUT_IMAGE_EXTENSION = ".png"

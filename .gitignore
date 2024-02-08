@@ -44,3 +44,10 @@ assets/tilesets/*/*.png
 **/generated
 
 **/*.template.json
+
+# Pants workspace files
+/.pants.d
+/dist/
+.pids
+
+docker-volumes
