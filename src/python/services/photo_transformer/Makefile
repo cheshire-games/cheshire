@@ -1,4 +1,4 @@
-IMAGE_NAME 			:= 		"photo-transformer"
+FULL_IMAGE_NAME		:= 		"654654581568.dkr.ecr.us-east-1.amazonaws.com/photo-transformer:latest"
 
 tests:
 	. venv/bin/activate
@@ -8,4 +8,7 @@ tests:
 	python -m pytest tests
 
 build:
-	docker build . -t "${IMAGE_NAME}"
+	docker build . -t "${REGISTRY}/${REPOSITORY}"
+
+release:
+	docker push "${REGISTRY}/${REPOSITORY}"

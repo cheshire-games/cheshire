@@ -1,0 +1,6 @@
+go 1.21.3
+
+use (
+	./packages/db-wrapper
+	./services/users-api
+)

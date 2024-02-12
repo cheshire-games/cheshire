@@ -3,3 +3,6 @@ tests:
 
 build:
 	$(MAKE) build -C services/photo_transformer
+
+release:
+	$(MAKE) release -C services/photo_transformer
