@@ -70,9 +70,17 @@ jobs:
         with:
           mask-password: 'false'
 
-      - name: Build and tag Docker image
+      - name: Build & tag Docker image
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: photo-transformer
           IMAGE_TAG: ${{ github.sha }}
-        run: make build && make release
+        run: make build
+
+      - name: Push Docker image to ECR
+        if: github.event_name == 'push'
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: photo-transformer
+          IMAGE_TAG: ${{ github.sha }}
+        run: make release

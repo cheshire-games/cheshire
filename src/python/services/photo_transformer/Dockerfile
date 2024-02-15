@@ -8,3 +8,4 @@ RUN python -m pip install -r requirements.txt
 COPY src/ ./src
 
 ENTRYPOINT ["python", "-m", "src.main"]
+# DUMMY
